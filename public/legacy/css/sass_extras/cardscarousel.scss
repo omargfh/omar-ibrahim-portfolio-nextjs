@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+$margin: 1.5rem;
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.highlights__parent {
+    overflow: hidden;
+    width: 100vw;
+    background: #fff8f6;
+    position: relative;
+    display: flex;
+    align-items: center;
+    .highlights {
+        font-family: 'Roboto', san-serif;
+        width: fit-content;
+        height: 100vh;
+        margin: 0;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 50%;
+        transform: translateX(-170px);
+        &__background {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+            img {
+                transform: scale(1.1);
+                height: 100vh;
+                min-width: 100vw;
+                filter: saturate(10%) blur(2px) brightness(1);
+                opacity: 0.3;
+                mix-blend-mode: screen;
+            }
+        }
+        &__card {
+            width: 320px;
+            height: 550px;
+            overflow: hidden;
+            position: relative;
+            background-color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease-in-out;
+            position: relative;
+            z-index: 1;
+            transition: all 0.7s cubic-bezier(.67, 0, .26, 1);
+            margin: auto -20px;
+            z-index: 1;
+            opacity: 0.7;
+            transform: scale(0.8);
+            user-select: none;
+            &__tag {
+                position: absolute;
+                top: $margin;
+                left: $margin;
+                font-weight: bold;
+                color: white;
+                z-index: 200;
+                text-transform: uppercase;
+                font-size: 20px;
+                text-shadow: 1px 1px 4px rgba(42, 42, 42, 0.3);
+            }
+            &__text {
+                margin: $margin;
+                .date {
+                    color: rgb(75, 75, 75);
+                }
+                .logo {
+                    width: 65%;
+                    overflow: hidden;
+                    img {
+                        max-width: 100%;
+                        height: 50px;
+                    }
+                }
+                h2 {
+                    font-size: 0.9rem;
+                    font-weight: bold;
+                }
+                h3 {
+                    font-size: 0.9rem;
+                    font-weight: lighter;
+                    color: rgb(75, 75, 75);
+                    height: 100px;
+                    overflow: hidden;
+                }
+                h4 {
+                    font-family: 'Italianno', cursive;
+                    font-size: 30px;
+                    line-height: 1;
+                    font-weight: lighter;
+                    position: absolute;
+                    bottom: -$margin/1.1;
+                }
+            }
+            &__image {
+                width: 100%;
+                height: 40%;
+                overflow: hidden;
+                img {
+                    height: 100%;
+                    min-width: 100%;
+                    margin-left: 50%;
+                    transform: translateX(-50%);
+                    filter: saturate(150%) brightness(80%);
+                }
+            }
+            &.active {
+                margin: auto 10px;
+                transform: scale(1);
+                cursor: pointer;
+                opacity: 1;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+            &:hover.active {
+                transform: scale(1.05);
+            }
+        }
+    }
+    button {
+        position: absolute;
+        padding: 10px 15px;
+        margin: 10px;
+        border: none;
+        opacity: 0.7;
+        background-color: black;
+        color: white;
+        font-size: 2.5rem;
+        left: 0;
+        cursor: pointer;
+        z-index: 2;
+        &:last-of-type {
+            right: 0;
+            left: unset;
+        }
+        &:active {
+            transform: scale(.9);
+        }
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+@media (max-width: 350px) {
+    .highlights__parent .highlights__card.active {
+        margin: auto 10px;
+        transform: scale(0.75);
+        &:hover {
+            transform: scale(0.8);
+        }
+    }
+    .highlights__parent {
+        button {
+            font-size: 1.5rem;
+            opacity: 0.5;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+.grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: gray;
+}
+@supports (-moz-animation: ease) {
+  .grayscale {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='desaturate'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#desaturate");
+  }
+}
+svg .grayscale {
+  filter: url("#desaturate");
+}
+.grayscale:hover {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+@supports (-moz-animation: ease) {
+  .grayscale:hover {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='normal'><feColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0' /></filter></svg>#normal");
+  }
+}
+svg .grayscale:hover {
+  filter: url("#normal");
+}
+.sepia {
+  -webkit-filter: sepia(100%);
+  filter: sepia(100%);
+  filter: sepia;
+}
+@supports (-moz-animation: ease) {
+  .sepia {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='sepia'><feColorMatrix type='matrix' values='0.393 0.769 0.189 0 0 0.349 0.686 0.168 0 0 0.272 0.534 0.131 0 0 0 0 0 1 0' /></filter></svg>#sepia");
+  }
+}
+svg .sepia {
+  filter: url("#sepia");
+}
+.sepia:hover {
+  -webkit-filter: sepia(0%);
+  filter: sepia(0%);
+}
+@supports (-moz-animation: ease) {
+  .sepia:hover {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='normal'><feColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0' /></filter></svg>#normal");
+  }
+}
+svg .sepia:hover {
+  filter: url("#normal");
+}
+.invert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  -ms-filter: progid:DXImageTransform.Microsoft.BasicImage(invert=1);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(invert=1);
+}
+@supports (-moz-animation: ease) {
+  .invert {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='invert'><feColorMatrix type='matrix' values='-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0' /></filter></svg>#invert");
+  }
+}
+svg .invert {
+  filter: url("#invert");
+}
+.invert:hover {
+  -webkit-filter: invert(0%);
+  filter: invert(0%);
+}
+@supports (-moz-animation: ease) {
+  .invert:hover {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='normal'><feColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0' /></filter></svg>#normal");
+  }
+}
+svg .invert:hover {
+  filter: url("#normal");
+}
+/*# sourceMappingURL=jquery.colormatrix.css.map */

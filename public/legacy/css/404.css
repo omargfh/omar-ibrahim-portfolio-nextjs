@@ -1,0 +1,325 @@
+/* Excerpts from Styles.css */
+
+* {
+    box-sizing: border-box;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}
+
+@media (max-width: 991px) {
+    * h1 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 991px) {
+    * h1,
+    * h2 {
+        text-align: center;
+    }
+}
+
+h1 {
+    font-size: 10vw;
+}
+
+.center-mobile {
+    -webkit-box-pack: center!important;
+    justify-content: center!important;
+}
+
+.margin-5 {
+    margin: 5px 10px 5px 0px;
+}
+
+
+/* New CSS */
+
+.absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: ghostwhite;
+    box-sizing: border-box;
+}
+
+.body {
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    height: 95vh;
+    position: relative;
+    transition: all 1s ease-in-out;
+    transform: scale(0.3);
+}
+
+.space {
+    width: 700px;
+    margin-top: -233px;
+    margin-left: -350px;
+    z-index: 0;
+}
+
+.error {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250px;
+    font-weight: 200;
+    color: white;
+    margin: -166px 0 0 -215px;
+    z-index: 10;
+}
+
+.text {
+    font-family: arial-rounded, Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    color: white;
+    margin: -180px 0 0 -130px;
+    z-index: 10;
+}
+
+.aster {
+    height: 180px;
+    z-index: 20;
+    margin: -90px 0 0 -70px;
+    animation-name: fall;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transition-timing-function: ease-in-out;
+}
+
+
+/* Shadow effects taken from Mario Duarte from Code Pen (adjusted for SVG support) */
+
+@keyframes fall {
+    0% {
+        transform: scale(0.9) rotate(-5deg);
+        -webkit-filter: drop-shadow( 0 5px 15px rgba(0, 0, 0, 0.6));
+        filter: drop-shadow( 0 5px 15px rgba(0, 0, 0, 0.6));
+    }
+    100% {
+        transform: scale(1.1) rotate(5deg);
+        -webkit-filter: drop-shadow( 0 5px 15px rgba(0, 0, 0, 0.6));
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.6));
+    }
+}
+
+.text-white {
+    color: white!important;
+    font-size: 14px;
+}
+
+.gear-left {
+    height: 200px;
+    z-index: 0;
+    margin: -100px 0 0 -450px;
+    animation: blow-left 3s forwards;
+}
+
+.gear-right {
+    height: 300px;
+    z-index: 1;
+    margin: -300px 0 0 200px;
+    animation: blow-right 3s forwards;
+    transition-timing-function: ease-in-out;
+}
+
+@keyframes blow-left {
+    0% {
+        margin: -100px 0 0 -380px;
+        transform: scale(0.1);
+    }
+    100% {
+        margin: -100px 0 0 -450px;
+        transform: scale(1);
+    }
+}
+
+@keyframes blow-right {
+    0% {
+        margin: -300px 0 0 180px;
+        transform: scale(0.1);
+    }
+    100% {
+        margin: -300px 0 0 200px;
+        transform: scale(1);
+    }
+}
+
+.typewriter p {
+    overflow: hidden;
+    border-right: .15em solid white;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
+}
+
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent
+    }
+    50% {
+        border-color: orange;
+    }
+}
+
+.go-back {
+    margin: 100px 0 0 -65px;
+    z-index: 100;
+}
+
+.btn-container {
+    position: relative;
+    display: inline-block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline;
+    position: relative;
+    padding: 0;
+}
+
+.btn::before {
+    content: attr(data-title);
+    display: inline-block;
+    padding: 12px 15px;
+    border: 0px solid white;
+    border-radius: 7px;
+    outline: none;
+    text-align: center;
+    color: rgba(148, 114, 100, 1.0);
+    background-color: white;
+    box-shadow: 4px 4px 11px 0px rgba(32, 32, 32, 0.5);
+    transition: all 0.5s ease-in-out;
+}
+
+.btn::after {
+    content: attr(data-title);
+    padding: 12px 15px;
+    position: absolute;
+    display: block;
+    top: -14px;
+    left: 0px;
+    border: 0px solid white;
+    border-radius: 7px;
+    outline: none;
+    text-align: center;
+    color: white;
+    background-color: rgba(148, 114, 100, 1.0);
+    clip: rect(0px, 0px, 200px, 0px);
+    transition: all 0.5s ease-in-out;
+}
+
+.btn:hover:before {
+    background-color: rgb(148, 114, 100);
+}
+
+.btn:hover:after {
+    clip: rect(0px, 215px, 200px, 0px);
+    cursor: pointer;
+}
+
+.btn-green::after {
+    background-color: rgb(4, 51, 34);
+}
+
+.btn::before {
+    color: rgb(26, 73, 134);
+    transition: all 1s ease-in-out;
+}
+
+.btn:hover::before {
+    background-color: rgb(4, 7, 74);
+    background-color: -moz-linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
+    background-color: -webkit-linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
+    background-color: linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#04074a", endColorstr="#756be9", GradientType=1);
+}
+
+.btn::after {
+    top: -12px;
+    background: rgb(4, 7, 74);
+    background: -moz-linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
+    background: linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#04074a", endColorstr="#756be9", GradientType=1);
+}
+
+
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+Bootstrap 4 breakpoints
+*/
+
+
+/* 
+Extra small devices (portrait phones, less than 576px) 
+No media query since this is the default in Bootstrap because it is "mobile first"
+*/
+
+@media (min-width: 373px) {
+    .body {
+        transform: scale(0.4);
+    }
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+
+@media (min-width: 576px) {
+    .body {
+        transform: scale(0.6);
+    }
+}
+
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+@media (min-width: 768px) {
+    .body {
+        transform: scale(0.8);
+    }
+}
+
+
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+    .body {
+        transform: scale(0.9);
+    }
+}
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+    .body {
+        transform: scale(1);
+    }
+}

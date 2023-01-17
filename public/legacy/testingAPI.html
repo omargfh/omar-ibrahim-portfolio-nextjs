@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Testing</title>
+</head>
+
+<body>
+
+    <!-- jQuery (Bootstrap JS plugins depend on it) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Facebook SDK -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '797168197837774',
+                cookie: true,
+                xfbml: true,
+                version: 'v11.0'
+            });
+            $(document).trigger('fbload');
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>
+        // Check if user is logged in
+        $(document).on('fbload', () => {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        })
+        //  Handle user status
+        let statusChangeCallback = response => {
+            if (response['status'] === 'connected') {
+                window.user_id = response['authResponse']['userID']
+            } else if (response['status'] === 'not_authorized') {
+                extrapolateData()
+            }
+        }
+        // Extrapolate the user first name and profile picture
+    </script>
+</body>
+
+</html>
