@@ -83,8 +83,11 @@ body {
     font-weight: 100;
     font-size: 20px;
     color: white;
-    margin: -180px 0 0 -130px;
     z-index: 10;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .aster {
@@ -199,7 +202,7 @@ body {
 }
 
 .btn {
-    display: inline;
+    display: block;
     position: relative;
     padding: 0;
 }
@@ -223,7 +226,7 @@ body {
     padding: 12px 15px;
     position: absolute;
     display: block;
-    top: -14px;
+    top: 0;
     left: 0px;
     border: 0px solid white;
     border-radius: 7px;
@@ -262,12 +265,15 @@ body {
 }
 
 .btn::after {
-    top: -12px;
     background: rgb(4, 7, 74);
     background: -moz-linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
     background: -webkit-linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
     background: linear-gradient(90deg, rgba(4, 7, 74, 1) 0%, rgba(117, 107, 233, 1) 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#04074a", endColorstr="#756be9", GradientType=1);
+}
+
+.position-relative {
+    position: relative;
 }
 
 
@@ -277,8 +283,8 @@ Bootstrap 4 breakpoints
 */
 
 
-/* 
-Extra small devices (portrait phones, less than 576px) 
+/*
+Extra small devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap because it is "mobile first"
 */
 

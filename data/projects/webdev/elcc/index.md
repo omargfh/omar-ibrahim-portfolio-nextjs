@@ -1,1 +1,0 @@
-<!-- Use this as an article placeholder -->
