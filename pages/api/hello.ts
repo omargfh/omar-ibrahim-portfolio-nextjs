@@ -3,7 +3,10 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
   name: string,
-  age: number
+  age: number,
+  affiliation: string,
+  major: string[],
+  message: string
 }
 
 function age(): number {
