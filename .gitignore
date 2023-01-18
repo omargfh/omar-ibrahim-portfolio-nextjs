@@ -39,4 +39,3 @@ next-env.d.ts
 /bin/firebase.ts
 /bin
 /node
-/util/firebase.ts
