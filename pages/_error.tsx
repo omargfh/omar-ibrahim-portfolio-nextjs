@@ -27,7 +27,7 @@ function Error({ statusCode }: { statusCode: number }) {
     return (
         <>
             <Head>
-                <title>Error {statusCode} has occurred - Omar Ibrahim</title>
+                <title>Error {statusCode} - Omar Ibrahim</title>
                 <link href="/legacy/css/404.css" rel="stylesheet"></link>
             </Head>
             <div className="body">

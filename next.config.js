@@ -52,6 +52,10 @@ const nextConfig = {
       {
         source: '/sitemap.html',
         destination: '/legacy/sitemap.html',
+      },
+      {
+        source: '/images/logo-sm-wh.png',
+        destination: '/legacy/images/logo-sm-wh.png'
       }
     ]
   }
