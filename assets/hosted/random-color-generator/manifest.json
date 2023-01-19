@@ -1,0 +1,8 @@
+{
+    "html": "index.html",
+    "css": "style.scss",
+    "js": "script.js",
+    "sass": true,
+    "include": true,
+    "capsule": "react"
+}

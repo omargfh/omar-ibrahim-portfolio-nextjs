@@ -1,21 +1,22 @@
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
-import { app, getFirestore, doc, getDoc } from '../../util/firebase';
-import { getRoutes } from '../../util/projects/paths';
-import onImageLoadFail from '../../util/render/imageLoadFail';
-import { Project, IndexProps } from '../../util/projects/types';
+import { app, getFirestore, doc, getDoc } from '../../../util/firebase';
+import { getRoutes, RouteType } from '../../../util/projects/paths';
+import onImageLoadFail from '../../../util/render/imageLoadFail';
+import { Project, IndexProps } from '../../../util/projects/types';
 
 export default function Index({ projects }: IndexProps) {
     return (
+        <>
+        <Head>
+            <title>Projects - Omar Ibrahim</title>
+            <meta name="description" content="Projects" />
+        </Head>
         <div style={{
             width: "clamp(300px, 80%, 800px)",
             margin: "0 auto"
         }}>
-            <Head>
-                <title>Projects</title>
-                <meta name="description" content="Projects" />
-            </Head>
-            <h1>Projects</h1>
+            <h1>{projects[0].mainCategory.split('').map((e: string, i: number) => i == 0 ? e.toUpperCase() : e).join('') ?? ""}</h1>
             <ul>
                 {projects.map((project, index) => {
                     return (
@@ -30,6 +31,7 @@ export default function Index({ projects }: IndexProps) {
                 })}
             </ul>
         </div>
+        </>
     )
 }
 
@@ -37,7 +39,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     // get a list of all projects in the database
     // return the list of projects
     // if there are no projects, return 404
-    const routes = await getRoutes();
+    let routes: RouteType[] = await getRoutes();
+    routes = routes.filter((route: RouteType) => route.mainCategory === context?.params?.mainCategory)
     // get the document corresponding to each route
     const db = getFirestore(app);
     const projects: Project[] = [];
@@ -73,5 +76,25 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
             params: context.params ? context.params : null,
             projects: projects
         },
+    }
+}
+
+export const getStaticPaths: GetStaticPaths<{mainCategory: string}> = async () => {
+    // Get the project data from the database
+    const routes: RouteType[] = await getRoutes();
+    let categories: Set<string> = new Set();
+    routes.forEach((route: RouteType) => {
+        categories.add(route.mainCategory);
+    });
+    console.log(categories)
+    return {
+        paths: Array.from(categories).map((category: string) => {
+            return {
+                params: {
+                    mainCategory: category
+                }
+            }
+        }),
+        fallback: false
     }
 }

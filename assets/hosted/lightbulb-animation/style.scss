@@ -1,0 +1,147 @@
+body {
+    background: #030118;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vw;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.clip {
+    position: absolute;
+    z-index: -10000;
+    opacity: 0;
+}
+.spacer {
+    height: 3rem;
+    width: 100vw;
+    opacity: 0;
+    display: block;
+}
+
+.animated {
+    --lightbulb-width: 600;
+    scale: calc(var(--lightbulb-width) / 600);
+    background: rgb(30, 30, 30);
+    background: linear-gradient(180deg, #2a2948 30%, #2a294800 90%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    width: 600px;
+    height: 240px;
+    clip-path: url(#light);
+    position: relative;
+    transition: scale 0.7s ease-in-out;
+    &::after {
+        display: block;
+        content: "";
+        width: 42.5px;
+        height: 42.5px;
+        background: rgb(210, 210, 255);
+        position: absolute;
+        top: 0;
+        z-index: 1000;
+        left: 19.8%;
+        border-radius: 50%;
+        animation: glowUp 5s ease-in-out;
+        animation-iteration-count: infinite;
+    }
+    .rotating-parent {
+        // workaround for Firefox artifacts
+        // see https://bugzilla.mozilla.org/show_bug.cgi?id=1671784
+        overflow: hidden;
+        border-radius: 0.1px;
+        min-height: 350px;
+        height: 350px;
+    }
+    .rotating-animation {
+        width: 1000px;
+        min-height: 350px;
+        height: 350px;
+        background: rgba(200, 200, 200, 1);
+        background: rgb(141, 166, 201);
+        background: linear-gradient(
+        271deg,
+        rgba(141, 166, 201, 0) 5%,
+        #8da6c9 50%,
+        rgba(141, 166, 201, 0) 100%
+        );
+        background-origin: 32% 16%;
+        clip-path: polygon(
+        0 0,
+        0 100%,
+        50% 57%,
+        50% 57%,
+        100% 100%,
+        100% 0%,
+        50% 43%,
+        50% 43%
+        );
+        animation: rotateThis 14s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.32, 0.58, 0.06, 1.27);
+        transform-origin: 50% 50%;
+        @keyframes rotateThis {
+            0%,
+            100% {
+                transform: translateY(-100px) translateX(-160px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) translateX(-160px) rotate(360deg);
+            }
+        }
+    }
+}
+
+// Extras
+.circle {
+    position: fixed;
+    width: 400;
+    height: 200px;
+    width: 200px;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(100px);
+}
+
+.circle.circle-bottom {
+    bottom: -10%;
+    left: -10%;
+    background: #035d86;
+}
+
+.circle.circle-top {
+    top: -10%;
+    right: -10%;
+    background: #035d86;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+    .animated {
+        --lightbulb-width: 200;
+    }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) {
+    .animated {
+        --lightbulb-width: 350;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) {
+    .animated {
+        --lightbulb-width: 400;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) {
+    .animated {
+        --lightbulb-width: 600;
+    }
+}

@@ -1,10 +1,9 @@
 import { GetStaticPaths } from 'next';
 import { app, getFirestore, doc, getDoc } from '../firebase';
+import { RouteType } from './types';
 
-export interface RouteType {
-    mainCategory: string;
-    symbol: string;
-    version: string;
+export type {
+    RouteType
 }
 
 export const getRoutes: () => Promise<RouteType[]> = async () => {

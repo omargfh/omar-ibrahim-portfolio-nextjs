@@ -1,9 +1,9 @@
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
-import { app, getFirestore, doc, getDoc } from '../../util/firebase';
-import { getRoutes } from '../../util/projects/paths';
-import onImageLoadFail from '../../util/render/imageLoadFail';
-import { Project, IndexProps } from '../../util/projects/types';
+import { app, getFirestore, doc, getDoc } from '../../../../util/firebase';
+import { getRoutes, RouteType } from '../../../../util/projects/paths';
+import onImageLoadFail from '../../../../util/render/imageLoadFail';
+import { Project, IndexProps } from '../../../../util/projects/types';
 
 export default function Index({ projects }: IndexProps) {
     return (
@@ -15,7 +15,7 @@ export default function Index({ projects }: IndexProps) {
                 <title>Projects</title>
                 <meta name="description" content="Projects" />
             </Head>
-            <h1>Projects</h1>
+            <h1>{projects[0].mainCategory.split('').map((e: string, i: number) => i == 0 ? e.toUpperCase() : e).join('') ?? ""}</h1>
             <ul>
                 {projects.map((project, index) => {
                     return (
@@ -24,6 +24,7 @@ export default function Index({ projects }: IndexProps) {
                                 <img src={project.thumbnail ? project.thumbnail : ""} alt={project.name} onError={onImageLoadFail} height="150" width="150"/>
                                 <h2>{project.name}</h2>
                                 <p>{project.description}</p>
+                                <p>{project.version}</p>
                             </a>
                         </li>
                     )
@@ -37,7 +38,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     // get a list of all projects in the database
     // return the list of projects
     // if there are no projects, return 404
-    const routes = await getRoutes();
+    let routes: RouteType[] = await getRoutes();
+    routes = routes.filter((route: RouteType) => route.symbol === context.params?.symbol && route.mainCategory === context.params?.mainCategory)
     // get the document corresponding to each route
     const db = getFirestore(app);
     const projects: Project[] = [];
@@ -73,5 +75,28 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
             params: context.params ? context.params : null,
             projects: projects
         },
+    }
+}
+
+export const getStaticPaths: GetStaticPaths<{symbol: string}> = async () => {
+    // Get the project data from the database
+    const routes: RouteType[] = await getRoutes();
+    let symbols: Set<Record<string, string>> = new Set();
+    routes.forEach((route: RouteType) => {
+        symbols.add({
+            symbol: route.symbol,
+            mainCategory: route.mainCategory
+        });
+    });
+    return {
+        paths: Array.from(symbols).map((symbol: Record<string, string>) => {
+            return {
+                params: {
+                    mainCategory: symbol.mainCategory,
+                    symbol: symbol.symbol
+                }
+            }
+        }),
+        fallback: false
     }
 }
