@@ -1,0 +1,98 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css";
+
+:root {
+  --maroon: #800000;
+  --dark__maroon: #6a0000;
+  --light__maroon: #ad0000;
+  --grey: #767676;
+  --light__grey: #d6d6ce;
+}
+
+.ULM_form-field {
+  position: relative;
+  &::before {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    position: absolute;
+    z-index: 2;
+  }
+  &::after {
+    display: block;
+    content: "";
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--light__maroon);
+    position: absolute;
+    z-index: 2;
+    transition: all 0.5s ease-in-out;
+  }
+  &.focused {
+    &::after {
+      width: 100%;
+    }
+    .ULM_form-col {
+      color: var(--light__maroon);
+    }
+  }
+
+  &.invalid {
+    input.ULM_form-control[type=text] {
+      background: rgba(225, 50, 50, 0.1);
+      border: solid 1px rgba(225, 50, 50, 1);
+      z-index: 3;
+    }
+    .indicator::after {
+      content: "⨯";
+      font-family: monospace;
+      font-size: 20px;
+      color: rgba(225, 50, 50, 1);
+      padding-right: 0.2em;
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-10%);
+      right: 10px;
+    }
+  }
+
+
+}
+
+.ULM_form-col {
+  padding-left: 0.4em;
+  font-family: 'Times new roman', times, serif;
+  font-style: italic;
+  transition: all 0.5s ease-in-out;
+  &.required {
+    &::after {
+      content: "*";
+      display: inline;
+      color: rgba(225, 50, 50, 1);
+    }
+  }
+}
+
+input.ULM_form-control[type=text] {
+  border: none;
+  outline: none;
+  border-radius: 0;
+  padding: 0.4em 0.4em;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  font-family: times, serif;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    padding: 0.7em 0.4em;
+    highlight: none;
+  }
+}

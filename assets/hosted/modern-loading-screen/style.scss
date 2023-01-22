@@ -1,0 +1,101 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/assets/css/bootstrap.min.css";
+body {
+  padding: 0;
+}
+
+#loading {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #363795, #005C97);
+
+  #loading-text {
+    display: block;
+    color: white;
+    font-size: 14pt;
+  }
+
+  #loading-desc {
+    min-height: 14px;
+    line-height: 14px;
+    display: block;
+    color: white;
+    font-size: 8pt;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 400px;
+    text-align: center;
+
+    & div {
+      position: absolute;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      animation: loading-desc 15s ease-in-out;
+      animation-iteration-count: infinite;
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          animation-delay: 3s * ($i - 1);
+        }
+      }
+    }
+  }
+
+  @keyframes loading-desc {
+    0% {
+      opacity: 0;
+    }
+    6% {
+      opacity: 1;
+    }
+    14% {
+      opacity: 1;
+    }
+    20% {
+     opacity: 0;
+    }
+  }
+
+  &-bars {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    & div {
+      display: inline;
+      width: 10px;
+      height: 15px;
+      margin-left: 2px;
+      color: white;
+      opacity: 0;
+      background-color: white;
+      animation: loading 5s ease-in-out;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+       @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          animation-delay: 250ms * $i;
+        }
+      }
+    }
+
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

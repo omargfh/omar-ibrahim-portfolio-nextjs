@@ -1,40 +1,45 @@
 import { useEffect } from "react";
+import * as Babel from "@babel/standalone";
 
-interface VanillaCapsuleProps {
+interface ModuleCapsuleProps {
     html?: string,
     css?: string,
     sass?: boolean,
-    js?: string
+    js?: string,
+    jsx: boolean
 }
 
-const VanillaCapsule = ({ html, css, sass, js }: VanillaCapsuleProps) => {
+const ModuleCapsule = ({ html, css, sass, js, jsx }: ModuleCapsuleProps) => {
     // This capsule overrides the default space. Use carefully.
     useEffect(() => {
         // Injects HTML and Js into DOM
         function injectHTML() {
             // override body
-            const htmlEL = document.createElement("html")
-            htmlEL.innerHTML = html ?? ""
+            const htmlEl = document.createElement("html")
+            htmlEl.innerHTML = html ?? ""
             const body = document.getElementsByTagName("body")[0]
-            body.innerHTML = htmlEL.getElementsByTagName("body")[0].innerHTML
+            body.innerHTML = htmlEl.getElementsByTagName("body")[0].innerHTML
 
             // remove next.js script
             const nextScript = document.getElementById("__next")
             nextScript?.remove()
             const del = Array.from(document.querySelectorAll("script")).forEach((s) => s.remove())
 
-            // append script
+            // jsx
             const script = document.createElement("script")
-            script.innerHTML = js ?? ""
-            head.appendChild(script)
+            script.type = "module"
+            if (jsx)
+                script.innerHTML = Babel.transform(js ?? "", { presets: ["react"] }).code
+            else
+                script.innerHTML = js ?? ""
+            body.appendChild(script)
         }
 
         // override head
-        const htmlEL = document.createElement("html")
-        htmlEL.innerHTML = html ?? ""
-
+        const htmlEl = document.createElement("html")
+        htmlEl.innerHTML = html ?? ""
         const head = document.getElementsByTagName("head")[0]
-        head.innerHTML = htmlEL.getElementsByTagName("head")[0].innerHTML
+        head.innerHTML = htmlEl.getElementsByTagName("head")[0].innerHTML
         const style = document.createElement("style")
 
         // remove all stylesheets
@@ -46,6 +51,34 @@ const VanillaCapsule = ({ html, css, sass, js }: VanillaCapsuleProps) => {
         // inject css
         if (!sass) {
             style.innerHTML = css ?? ""
+            style.innerHTML += `
+                .loading {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                    font-family: "Arial";
+                    background: #111;
+                }
+
+                .loading .loading__spinner {
+                    width: 50px;
+                    height: 50px;
+                    border: 5px solid #f3f3f3;
+                    border-top: 5px solid #ff1111;
+                    border-radius: 50%;
+                    animation: spint 2s linear infinite;
+                }
+
+                @keyframes spint {
+                    0% {
+                    transform: rotate(0deg);
+                    }
+                    100% {
+                    transform: rotate(360deg);
+                    }
+                }
+            `
             head.appendChild(style)
             injectHTML()
         }
@@ -71,4 +104,4 @@ const VanillaCapsule = ({ html, css, sass, js }: VanillaCapsuleProps) => {
     )
 }
 
-export default VanillaCapsule
+export default ModuleCapsule

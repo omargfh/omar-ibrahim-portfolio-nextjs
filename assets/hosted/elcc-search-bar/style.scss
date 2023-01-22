@@ -1,0 +1,93 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css";
+
+.row {
+    margin-top: 1em;
+  }
+  .search-input {
+    width: 80%;
+    height: 50px;
+  }
+
+  .form-control {
+    height: 50px;
+    margin-bottom: 1em;
+  }
+
+  .search-button {
+    box-sizing: border-box;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+
+  .search-button::before {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: black;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    transform: scaleX(1) translateX(-100px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(1, -0.8, 0.28, 0.96);
+  }
+
+  .search-button:hover::before {
+    transform: scaleX(1) translateX(0);
+    color: white;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .search-button i,
+  .search-button .rotate {
+    z-index: 10;
+  }
+
+  .search-button:hover i {
+    color: white;
+  }
+
+  .search-button:hover {
+    filter: brightness(1.2);
+  }
+
+  .button-a {
+    background-color: #fc8803;
+    margin: 0 0.5em;
+  }
+
+  .button-b {
+    background-color: #0586ff;
+  }
+
+  .rotate {
+    transition: all 0.5s ease-in-out;
+    transform: rotate(0deg);
+  }
+  .rotated {
+    transform: rotate(180deg);
+  }
+
+  .pos-relative {
+    position: relative !important;
+  }
+
+  label {
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    left: 25px;
+    padding: 0 0.2em;
+  }

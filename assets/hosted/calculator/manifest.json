@@ -5,5 +5,5 @@
     "sass": true,
     "include": true,
     "capsule": "module",
-    "jsx": false
+    "jsx": true
 }

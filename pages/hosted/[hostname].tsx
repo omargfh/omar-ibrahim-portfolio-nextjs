@@ -1,13 +1,13 @@
 import React from 'react'
 
 import VanillaCapsule from '../../components/Capsules/VanillaCapsule';
-import ReactCapsule from '../../components/Capsules/ReactCapsule';
+import ModuleCapsule from '../../components/Capsules/ModuleCapsule';
 
 import { promises as fs } from 'fs'
 import path from 'path'
 import { GetStaticPaths } from 'next';
 
-const Color = ({ html, css, sass, js, capsuleType } : any) => {
+const Color = ({ html, css, sass, js, capsuleType, jsx } : any) => {
     return (
         <>
             {/* Vanilla Capsule */}
@@ -17,8 +17,8 @@ const Color = ({ html, css, sass, js, capsuleType } : any) => {
             }
             {/* React capsule */}
             {
-                capsuleType === "react"
-                    && <ReactCapsule html={html} css={css} sass={sass} js={js} />
+                (capsuleType === "react" || capsuleType === "module")
+                    && <ModuleCapsule html={html} css={css} sass={sass} js={js} jsx={true} />
 
             }
         </>
@@ -32,13 +32,21 @@ export const getStaticProps = async (context: any) => {
     const sass = manifest['sass'];
     const js = manifest['js'].length > 0 ? await fs.readFile(path.join(process.cwd(), `assets/hosted/${context?.params?.hostname}/${manifest['js']}`), 'utf8') : "";
     const capsuleType = manifest['capsule'];
+    let jsx: boolean;
+    if (capsuleType === "react") {
+        jsx = manifest['jsx'];
+    }
+    else {
+        jsx = false
+    }
     return {
         props: {
             html,
             css,
             sass,
             js,
-            capsuleType
+            capsuleType,
+            jsx: jsx ?? ""
         }
     }
 }
