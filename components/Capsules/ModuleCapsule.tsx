@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+// @ts-ignore
 import * as Babel from "@babel/standalone";
 
 interface ModuleCapsuleProps {
