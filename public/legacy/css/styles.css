@@ -955,6 +955,31 @@ p.post__published {
 
 
 /* sections */
+.bg {
+    background: url('../images/launch.jpg');
+    background-size: cover;
+    animation: glowUp 2s ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes glowUp {
+    from {
+        filter: brightness(100%);
+    }
+    to {
+        filter: brightness(150%);
+    }
+}
+
+/* media phone make bg opacity lower */
+@media (max-width: 768px) {
+    .bg {
+        filter: brightness(50%);
+        animation: unset;
+    }
+}
 
 .section {
     margin: 10px 0px;
@@ -1373,7 +1398,7 @@ p.post__published {
 }
 
 
-/* 
+/*
 .card:hover .brown,
 .card:hover p {
     color: white!important;
@@ -2776,8 +2801,8 @@ h1.quote {
 }
 
 
-/* 
-Extra small devices (portrait phones, less than 576px) 
+/*
+Extra small devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap because it is "mobile first"
 */
 
@@ -3427,3 +3452,30 @@ option {
         transform: rotateY(1turn);
     }
 }
+
+/* darkmode
+@media (prefers-color-scheme: dark) {
+    html {
+        color-scheme: dark;
+    }
+    body {
+        color: white;
+        background: #111;
+    }
+    .section {
+        color: white;
+        background: #111;
+    }
+    .page-title {
+        opacity: 0.1;
+    }
+    p {
+        color: white;
+    }
+    .inherit-bg {
+        background: url(../images/launch.jpg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: scroll;
+    }
+} */
