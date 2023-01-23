@@ -3,6 +3,7 @@ $(document).ready(function() {
     // Prespective on hover
     document.querySelectorAll('.prsp').forEach(function(card) {
         card.addEventListener('mousemove', prespectiveOnHover);
+        card.addEventListener('mouseout', turnOffPrespective);
     });
 
     // Brings sub-menus to Bootstrap 4 (by Gerhard Gotz on StackOverFlow)
@@ -860,7 +861,16 @@ function prespectiveOnHover(mouseEvent) {
     let $rotateX = -$mouseYFromCenter / $perspective;
     let $translateZ = Math.abs($mouseXFromCenter) / 100 + Math.abs($mouseYFromCenter) / 100;
     $parent.css({
-        "transform": "perspective(" + $perspective + "px) rotateX(" + $rotateX + "deg) rotateY(" + $rotateY + "deg) translateZ(" + $translateZ + "px)"
+        "transform": "perspective(" + $perspective / 5 + "px) rotateX(" + $rotateX + "deg) rotateY(" + $rotateY + "deg) translateZ(" + $translateZ + "px)"
+    });
+}
+
+function turnOffPrespective(mouseEvent) {
+    let $this = $(this);
+    let $parent = $this.parent();
+    $parent.css({
+        "transition": "all 0.5s ease",
+        "transform": "perspective(100px) rotateX(0deg) rotateY(0deg) translateZ(0px)"
     });
 }
 
