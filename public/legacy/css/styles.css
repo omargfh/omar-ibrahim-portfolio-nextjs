@@ -955,7 +955,7 @@ p.post__published {
 
 /* sections */
 .bg {
-    background: url('../images/launch.jpg');
+    background: url('../images/launch.webp');
     background-size: cover;
     animation: glowUp 2s ease-in-out;
     animation-timing-function: ease-in-out;
@@ -3689,7 +3689,7 @@ option {
         color: white;
     }
     .inherit-bg {
-        background: url(../images/launch.jpg);
+        background: url(../images/launch.webp);
         background-size: cover;
         background-position: center;
         background-attachment: scroll;
